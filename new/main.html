@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>Music Collection</title>
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+      <link rel="stylesheet" href="design.css">
+   </head>
+   <body>
+      <div class="menu-bar">
+         <div class="logo">Anycompany</div>
+         <div class="sign-out"><a href="login.html" style="color: white;">signout</a></div>
+      </div>
+  
+      <h1>Music Collection</h1>
+      <h6>Create, Read, Update and Delete album</h6>
+      <div class="container">
+         <div class="row">
+            <!-- Albums will be dynamically added here -->
+         </div>
+         <!-- Edit album modal -->
+<div class="modal fade" id="edit-album-modal" tabindex="-1" role="dialog" aria-labelledby="editAlbumModalLabel" aria-hidden="true">
+   <div class="modal-dialog" role="document">
+     <div class="modal-content">
+       <div class="modal-header">
+         <h5 class="modal-title" id="editAlbumModalLabel">Edit Album</h5>
+         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+           <span aria-hidden="true">&times;</span>
+         </button>
+       </div>
+       <div class="modal-body">
+         <form>
+           <div class="form-group">
+             <label for="edit-artist">Artist</label>
+             <input type="text" class="form-control" id="edit-artist" placeholder="Enter artist name">
+           </div>
+           <div class="form-group">
+             <label for="edit-album">Album</label>
+             <input type="text" class="form-control" id="edit-album" placeholder="Enter album name">
+           </div>
+           <div class="form-group">
+             <label for="edit-genre">Genre</label>
+             <input type="text" class="form-control" id="edit-genre" placeholder="Enter genre">
+           </div>
+           <div class="form-group">
+             <label for="edit-rank">Rank</label>
+             <input type="number" class="form-control" id="edit-rank" placeholder="Enter rank">
+           </div>
+           <div class="form-group">
+             <label for="edit-year">Year</label>
+             <input type="text" class="form-control" id="edit-year" placeholder="Enter year">
+           </div>
+         </form>
+       </div>
+       <div class="modal-footer">
+         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+         <button type="button" class="btn btn-primary" id="save-changes-btn">Save changes</button>
+       </div>
+     </div>
+   </div>
+ </div>
+ 
+      </div>
+      <script src="album.js"></script>
+      <script>
+         function renderAlbums() {
+            let html = "";
+            for (let album of albums) {
+               html += `
+                  <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+                     <div class="card h-100">
+                        <img src="cover.PNG" class="card-img-top" alt="${album.Album} cover">
+                        <div class="card-body d-flex flex-column justify-content-between">
+                           <div>
+                             <h5 class="card-title">${album.Album}</h5>
+                             <p class="card-text">${album.Artist} - ${album.Year}</p>
+                             <p class="card-text">Genre: ${album.Genre}</p>
+                             <p class="card-text">Rank: ${album.Rank}</p>
+                           </div>
+                           <div class="d-flex justify-content-between">
+                              <button class="btn btn-link edit-album" data-id="${album.id}" onclick="editAlbum()"><i class="fa fa-edit"></i></button>
+                              <button class="btn btn-link delete-album" data-id="${album.id}"><i class="fa fa-trash"></i></button>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               `;
+            }
+            document.querySelector(".row").innerHTML = html;
+         }
+         window.onload = function() {
+            renderAlbums();
+         };
+         function editAlbum(albumId) {
+        let album = albums.find(a => a.id == albumId);
+        let editArtistInput = document.getElementById("edit-artist");
+        let editAlbumInput = document.getElementById("edit-album");
+        let editGenreInput = document.getElementById("edit-genre");
+        let editRankInput = document.getElementById("edit-rank");
+        let editYearInput = document.getElementById("edit-year");
+        editArtistInput.value = album.Artist;
+        editAlbumInput.value = album.Album;
+        editGenreInput.value = album.Genre;
+        editRankInput.value = album.Rank;
+        editYearInput.value = album.Year;
+        $("#edit-album-modal").modal("show");
+     }
+
+     // Function to handle delete button click
+     function deleteAlbum(albumId) {
+        // Code to delete the album from the collection
+     }
+
+     // Add event listeners for edit and delete buttons
+     $(document).on("click", ".edit-album", function() {
+        let albumId = $(this).data("id");
+        editAlbum(albumId);
+     });
+
+     $(document).on("click", ".delete-album", function() {
+        let albumId = $(this).data("id");
+        deleteAlbum(albumId);
+     });
+
+
+      </script>
+      
+      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+      <script src="app.js"></script>
+
+
+   </body>
+</html>

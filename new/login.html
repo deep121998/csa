@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Login Page</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+	<style>
+		body {
+			background-color: #f7f7f7;
+			font-family: Arial, sans-serif;
+		}
+
+		.login-form {
+			background-color: #ffffff;
+			border-radius: 5px;
+			padding: 20px;
+			box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.1);
+			margin-top: 50px;
+		}
+
+		.login-form h2 {
+			margin-bottom: 20px;
+			text-align: center;
+		}
+
+		.error-message {
+			color: red;
+			font-size: 12px;
+			margin-top: 5px;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="col-md-6">
+				<form class="login-form" method="post" action="main.html">
+					<h2>Login</h2>
+					<div class="form-group">
+						<label for="username">Username</label>
+						<input type="text" class="form-control" id="username" name="username">
+						<span class="error-message" id="username-error"></span>
+					</div>
+					<div class="form-group">
+						<label for="password">Password</label>
+						<input type="password" class="form-control" id="password" name="password">
+						<span class="error-message" id="password-error"></span>
+					</div>
+					<div class="form-group">
+						<button type="submit" class="btn btn-primary">Login</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+	<script>
+		$(function() {
+			$('form').validate({
+				rules: {
+					username: {
+						required: true,
+						minlength: 3
+					},
+					password: {
+						required: true,
+						minlength: 6
+					}
+				},
+				messages: {
+					username: {
+						required: 'Please enter your username',
+						minlength: 'Username must be at least 3 characters long'
+					},
+					password: {
+						required: 'Please enter your password',
+						minlength: 'Password must be at least 6 characters long'
+					}
+				},
+				errorElement: 'span',
+				errorPlacement: function(error, element) {
+					error.addClass('error-message');
+					error.insertAfter(element);
+				}
+			});
+			// Get the login form and add a submit event listener
+const loginForm = document.querySelector('.login-form');
+loginForm.addEventListener('submit', (event) => {
+  event.preventDefault(); // prevent form submission
+  
+  // Get the username and password fields
+  const usernameField = document.querySelector('#username');
+  const passwordField = document.querySelector('#password');
+  
+  // Get the entered values
+  const enteredUsername = usernameField.value;
+  const enteredPassword = passwordField.value;
+  
+  // Check if the entered credentials are correct
+  if (enteredUsername === 'admin' && enteredPassword === 'admin') {
+    // Redirect to the welcome page
+    window.location.href = 'main.html';
+  } else {
+    // Display an error message
+    const errorSpan = document.createElement('span');
+    errorSpan.classList.add('error-message');
+    errorSpan.textContent = 'Invalid username or password';
+    loginForm.appendChild(errorSpan);
+  }
+});
+
+		});
+	</script>
+</body>
+</html>

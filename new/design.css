@@ -1,0 +1,65 @@
+/* Menu bar styles */
+.menu-bar {
+    background-color: #333;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+ }
+ 
+ .logo {
+    font-size: 24px;
+    font-weight: bold;
+ }
+ 
+ .sign-out {
+    font-size: 18px;
+    cursor: pointer;
+    color: #fff;
+ }
+ 
+ .sign-out:hover {
+    text-decoration: underline;
+ }
+ 
+ /* Album styles */
+ .album {
+    margin-bottom: 20px;
+ }
+ 
+ .album img {
+    max-width: 200px;
+ }
+ 
+ .album h2 {
+    margin-top: 10px;
+    margin-bottom: 5px;
+    font-size: 20px;
+ }
+ 
+ .album p {
+    margin: 0;
+    font-size: 16px;
+ }
+
+ .card-img-top {
+    max-height: 200px;
+    object-fit: cover;
+ }
+ 
+ .card-text {
+    font-size: 14px;
+ }
+ 
+ .card-title {
+    font-size: 16px;
+    font-weight: bold;
+ }
+
+ /*.container {
+    max-width: 80%;
+    margin: 0 auto;
+ }*/
+ 
+
